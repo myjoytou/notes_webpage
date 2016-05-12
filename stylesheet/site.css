@@ -1,0 +1,44 @@
+ .side-panel {
+
+    margin-top: 20px;
+    position: fixed;
+    text-align: left;
+    background: #fee;
+}
+.side-heading {
+    margin-left: 0;
+}
+.side-options {
+    text-align: left;
+    margin-left: 30px;
+}
+
+.quoted {
+    color: blue;
+}
+
+.options {
+    text-align: left;
+}
+.option-list {
+    margin-bottom: 10px;
+}
+
+.content-data {
+    margin-top: 20px;
+}
+
+.side-content-wrapper {
+    margin-top: 10px;
+}
+
+.vertical-gap {
+    margin-bottom: 10px;
+}
+.no-left-margin {
+    margin-left: 0px;
+}
+.navbar {
+    margin-bottom: 0px !important;
+}
+ 

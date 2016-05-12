@@ -1,0 +1,67 @@
+<h2>Ques</h2>
+<li> 1. Why the 'function' 'foo' in the below code is 'not' able to 'change' the 'variable' 'greet', while 'foo1' is?</li>
+<pre><code>
+[js]
+    function Greeting() {
+      this.greet = "hello there!";
+      var foo = function() {
+        this.greet = 'hii there!';
+      }
+      this.call = function() {
+        foo();
+      }
+      Foo.prototype.foo1 = function() {
+        this.greet = 'helllllloo there!';
+      }
+    }
+
+    var grt = new Greeting();
+    console.log(grt.greet);
+    grt.call()
+    console.log(grt.greet);
+    grt.foo1()
+    console.log(grt.greet);
+[js]
+</code></pre>
+
+<h2>ans</h2>
+As we know that, when we call any <span class='quoted'>'function'</span> with the <span class='quoted'>'new'</span> keyword 
+<h2>these things happens</h2>
+<li> 1. A 'new' object gets created.</li>
+<li> 2. The newly created object gets linked to an existing unnamed 'object'.</li>
+<li> 3. The 'context' for the newly created object is set to 'this'.</li>
+<li> 4. The object gets returned implicitly.</li>
+
+<h2>So in our case we have put</h2>
+<li> 1. 'greet' varible on our object which can be referenced by 'this'.</li>
+<li> 2. a varible called 'foo' will be there on the function 'Greeting' which does not have any direct linkage to the object referenced by 'this'</li>
+<li> 3. another variable called 'call' will be there on the object referenced by 'this'.</li>
+<li> 4. the variable 'foo1' will be there on the 'prototype' of the 'Greeting' function, which happens to the 'unnamed' object(in case of 'new' keyword).</li>
+
+The returned object gets assigned to the <span class='quoted'>'grt'</span> varible. 
+so calling <span class='quoted'>'console.log(grt.greet);'</span> will give us reference 
+to the correct <span class='quoted'>'greet'</span> varible on the object. 
+
+Now we call the  <span class='quoted'>"call function"</span> which in-turn is 
+calling the <span class='quoted'>'foo'</span> function. 
+The <span class='quoted'>'call'</span> function is able to call the <span class='quoted'>'foo'</span> function 
+because they are in the same  <span class='quoted'>"lexical scope".</span> 
+(remember  <span class='quoted'>'lexical scope'</span> and <span class='quoted'>'this'</span> are different) 
+The <span class='quoted'>'foo'</span> function which is defined in the function 
+<span class='quoted'>'Greeting'</span> is being called with 
+As we are using <span class='quoted'>'non-strict'</span> mode the  <span class='quoted'>'default scope'</span> 
+would be the <span class='quoted'>'window'.</span> So instead of changing the 
+<span class='quoted'>'greet'</span> variable on the <span class='quoted'>'this'</span> object, we are changing 
+it on the <span class='quoted'>'window'.</span> 
+
+<h2>Now consider the 'foo1' function</h2>
+As it is on the <span class='quoted'>'prototype'</span> of the <span class='quoted'>'Greeting'</span> 
+function, and it has a linkage called <span class='quoted'>"[[p]]"</span> 
+with the <span class='quoted'>'this'</span> object. Calling the <span class='quoted'>'foo1'</span> on 
+the <span class='quoted'>'this'</span> object will give us the  <span class='quoted'>'real foo1'</span> 
+by 
+Note that we are calling the <span class='quoted'>'foo1'</span> function 
+with 
+
+
+

@@ -1,0 +1,67 @@
+<h2>Definition</h2>
+<span class='quoted'>"Regular"</span> <span class='quoted'>"expressions"</span> are patterns used to match  <span class='quoted'>"character combinations"</span> in strings. In JavaScript, regular expressions are also 
+objects. These patterns are used with the <span class='quoted'>"exec"</span> and <span class='quoted'>"test"</span> methods of <span class='quoted'>"RegExp",</span> and with the <span class='quoted'>"match",</span> <span class='quoted'>"replace",</span> <span class='quoted'>"search",</span> and 
+<span class='quoted'>"split"</span> methods of <span class='quoted'>"String".</span> This chapter describes JavaScript regular expressions. 
+
+<h2>Creating a regular expression</h2>
+
+<h3> You construct a regular expression in one of two ways :</h3>
+
+<li> 1. Using a regular expression literal, which consists of a pattern enclosed between slashes, as follows:</li>
+
+<pre><code>
+[js]
+                var re = /ab+c/;
+[js]
+</code></pre>
+
+<h3>Note :</h3>
+Regular expression literals provide  <span class='quoted'>"compilation of the regular expression when the script is loaded".</span> When the regular 
+expression will  <span class='quoted'>"remain constant",</span>  <span class='quoted'>"use this for better performance".</span> 
+
+<li> 2. Or calling the constructor function of the RegExp object, as follows:</li>
+
+<pre><code>
+[js]
+                var re = new RegExp("ab+c");
+[js]
+</code></pre>
+
+<h3>Note :</h3>
+Using the constructor function provides  <span class='quoted'>"runtime compilation of the regular expression".</span> Use the  <span class='quoted'>"constructor function"</span> 
+when you know the  <span class='quoted'>"regular expression pattern will be changing",</span> or you don't know the pattern and are getting it from 
+ <span class='quoted'>"another source, such as user input".</span> 
+
+
+<h2>Writing a regular expression pattern</h2>
+
+A regular expression pattern is composed of simple <span class='quoted'>"characters",</span> such as <span class='quoted'>"/abc/",</span> or a combination of simple and special 
+characters, such as <span class='quoted'>"/ab*c/"</span> or <span class='quoted'>"/Chapter"</span> <span class='quoted'>"(\d+)\.\d*/".</span> The last example includes <span class='quoted'>"parentheses"</span> which are used as a 
+ <span class='quoted'>"memory device".</span>  <span class='quoted'>"The match made with this part of the pattern is remembered for later use",</span> as described in Using parenthesized 
+substring matches.
+<h3> Using simple patterns :</h3>
+
+Simple patterns are constructed of characters for which you want to find a <span class='quoted'>"direct"</span> match. For example, the pattern <span class='quoted'>"/abc/"</span> 
+matches character combinations in strings only when exactly the characters <span class='quoted'>'abc'</span> occur together and in that order. Such a match 
+would succeed in the strings <span class='quoted'>"Hi,</span> do you know your  abc's?"</span> and  <span class='quoted'>"The latest airplane designs evolved from slabcraft."</span> In both 
+cases the match is with the substring <span class='quoted'>'abc'.</span> There is no match in the string  <span class='quoted'>'Grab crab'</span> because while it contains the 
+substring <span class='quoted'>'abc'.</span> 
+
+<h3> Using special characters :</h3>
+
+When the search for a match requires something more than a <span class='quoted'>"direct"</span> match, such as finding one or more <span class='quoted'>"b's",</span> or finding white 
+space, the pattern includes  <span class='quoted'>"special characters".</span> For example, the pattern <span class='quoted'>"/ab*c/"</span> matches any character combination in which 
+a single <span class='quoted'>'a'</span> is followed by zero or more 
+followed by <span class='quoted'>'c'.</span> In the string <span class='quoted'>"cbbabbbbcdebc,"</span> the pattern matches the substring <span class='quoted'>'abbbbc'.</span> 
+
+The following table provides a complete list and description of the special characters that can be used in regular expressions.For table refer the doc at  <span class='quoted'>"MDN: regular expressions"</span> 
+
+
+<h2>Search function</h2>
+<h2>syntax</h2>
+str.search(RegExp)
+<h2>RegExp</h2>
+A regular expression object. If a non-RegExp object obj is passed, it is implicitly converted to a RegExp by using newRegExp(obj).
+<h2>return</h2>
+If successful, search() returns the index of the first match of the regular expression inside the string. Otherwise, itreturns -1.
+

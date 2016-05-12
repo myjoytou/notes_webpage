@@ -1,0 +1,586 @@
+<h2>Things discussed in this documentation</h2>
+<li> 1.  jQuery syntax</li>
+<li> 2.  Putting jQuery in html</li>
+<li> 3.  What does "$(document).ready(function(){})"  mean</li>
+<li> 4.  Searching elements in jQuery</li>
+<li> 5.  Changin text in jQuery</li>
+<li> 6.  Searching the DOM</li>
+<li> 7.  Walking the DOM by traversing it.</li>
+<li> 8.  Working with the DOM</li>
+<li> 9.  Acting on Interaction</li>
+<li> 10. Filtering in jQuery</li>
+<li> 11. Class manipulating in jQuery</li>
+<li> 12. Animation in jQuery</li>
+<li> 13. Length method in jQuery</li>
+<li> 14. Events in jQuery</li>
+<li> 15. Random questions in jQuery</li>
+<li> 16. Event bubbling(stopPropagation() and preventDefault())</li>
+<li> 17. Taming the CSS</li>
+
+
+<h2>Initial syntax </h2>
+
+<pre><code>
+[js]
+    $(document).ready(function() {
+          $('#green').fadeOut(1000);
+    });
+[js]
+</code></pre>
+
+
+<h2>Putting jQuery in the html </h2>
+<h2>* use</h2>
+<script src="file1.js"> </script> 
+
+<h2>syntax</h2>
+<pre><code>
+[js]
+      $(document).ready();
+[js]
+</code></pre>
+
+
+<h2>What does "$(document).ready(function(){})"  mean</h2>
+* <span class='quoted'>"$()"</span> says jQuery is about to begin. 
+
+* Putting document between the parentheses tells usthat we're about to work our magic on the HTML document itself. 
+
+* <span class='quoted'>".ready();"</span> is a function, or basic action, in jQuery. 
+It says <span class='quoted'>"hey,</span> I'm going to do stuff as soon as the HTML document is  ready!"</span> 
+
+* Whatever goes in <span class='quoted'>".ready()'s"</span> parentheses is the jQuery event that occurs 
+as soon as the HTML document is ready.
+* <span class='quoted'>"ready()"</span> function ends with a semicolon to mark that we have done giving out query. 
+
+ <span class='quoted'>"For making the jQuery object we need to give the exact selector as we used to give in css."</span> 
+
+
+<h2>Searching elements in jQuery</h2>
+we can use css selection style.
+for finding <span class='quoted'>"p"</span> element: $('p') 
+
+for finding 
+
+
+<h2>Changin text in jQuery</h2>
+$(selector).text() : getter$(selector).text("some text"): setter 
+
+
+<h2>Searching the DOM</h2>
+<h2>If we have to select the "li" from below code</h2>
+      <ul id="destinations">
+        <li>Rome</li>
+        <li>Paris</li>
+        <li>Rio</li>
+      </ul>
+
+<h2>we can do it like</h2>
+<pre><code>
+[js]
+      $('#destinations li')
+[js]
+</code></pre>
+here <span class='quoted'>'#destinations'</span> is the <span class='quoted'>'parent'.</span> 
+and <span class='quoted'>"li"</span> is the descendant 
+
+<h2>*note*</h2>
+this code will select all the <span class='quoted'>"li"</span> elems. 
+
+<h2>'If we have to select the "direct child" then'</h2>
+<pre><code>
+[js]
+      $('#destinations > li')
+[js]
+</code></pre>
+
+<h2>'selecting multiple elements'</h2>
+<pre><code>
+[js]
+      $('#destinations, li')
+[js]
+</code></pre>
+*note*: note the <span class='quoted'>"comma".</span> 
+
+<h2>'css-like pseudo classes'</h2>
+<pre><code>
+[js]
+      $('#destinations li:first')
+
+      $('#destinations li:last')
+
+      $('#destinations li:odd')
+
+      $('#destinations li:even')
+[js]
+</code></pre>
+
+<h2>Walking the DOM by traversing it</h2>
+<h2>conider the below code</h2>
+<pre><code>
+[js]
+      $('#destinations li'); // this is not that efficient
+
+      $('#destinations').find('li'); // efficient
+      // find is used to traverse
+[js]
+</code></pre>
+
+<h2>"filtering by traversing"</h2>
+<pre><code>
+[js]
+      $('li:first'); // not that efficient
+
+      $('li').first(); // efficient
+
+      $('li:last');
+      // can be written as
+      $('li').last();
+[js]
+</code></pre>
+
+<h2>"There are two methods for traversing the siblings"</h2>
+<li> 1. next()</li>
+<li> 2. prev()</li>
+<h2>ex</h2>
+<pre><code>
+[js]
+        //calling
+        $('li').first().next(); // will give the 'li' after the first 'li'
+
+        $('li').first().prev();  // will again give the first 'li'
+[js]
+</code></pre>
+
+<h2>"For finding the 'parent' of an element we can do"</h2>
+<pre><code>
+[js]
+      $('li').first().parent();
+[js]
+</code></pre>
+
+<h2>"Selecting all the children under a common parent"</h2>
+<pre><code>
+[js]
+      $('#destinations').children('li');
+
+      // children(), unlike find(), only selects direct children
+[js]
+</code></pre>
+
+
+<h2>Working with the DOM</h2>
+<li> 1. Appending to the DOM:</li>
+<pre><code>
+[js]
+      var price = $('<p>From $399.99</p>'); // right way of creating an element
+[js]
+</code></pre>
+
+<h2>"methods for manipulating to the DOM"</h2>
+<li> 1. '.append(<element>)':</li>
+<pre><code>
+[js]
+          $(document).ready(function() {
+          var price = $('<p>From $399.99</p>');
+          $('.vacation').append(price);
+          });
+[js]
+</code></pre>
+Puts the price node at the bottom of <span class='quoted'>'.vacation'</span> 
+
+        "<pre>"
+        ---li class='vacation'
+            |
+            ---h2
+                |
+                --- some text
+            |
+            ---button
+                  |
+                  --- some work
+            |
+            ---p
+                |
+                --- From $399.99
+        "</pre>"
+
+<li> 2. '.prepend(<element)':</li>
+<pre><code>
+[js]
+          $(document).ready(function() {
+          var price = $('<p>From $399.99</p>');
+          $('.vacation').prepend(price);
+          });
+[js]
+</code></pre>
+Adds the note to the top of <span class='quoted'>'.vacation'</span> 
+
+        "<pre>"
+        ---li class='vacation'
+            |
+            ---p
+                |
+                --- From $399.99
+            |
+            ---h2
+                |
+                --- some text
+            |
+            ---button
+                  |
+                  --- some work
+        "</pre>"
+
+<li> 3. '.after(<element>)':</li>
+<pre><code>
+[js]
+          $(document).ready(function() {
+          var price = $('<p>From $399.99</p>');
+          $('#vacation').before(price);
+          $('.vacation').after(price);
+          });
+[js]
+</code></pre>
+The above code will append the <span class='quoted'>"p"</span> element after the <span class='quoted'>"li"</span> element whose 
+class name is <span class='quoted'>'vacation',</span> in the same hierarchy. 
+
+        "<pre>"
+        ---li class='vacation'
+            |
+            ---h2
+                |
+                --- some text
+            |
+            ---button
+                  |
+                  --- some work
+        ---p
+            |
+            --- From $399.99
+        "</pre>"
+
+<li> 4. '.before(<element>)':</li>
+<pre><code>
+[js]
+          $(document).ready(function() {
+          var price = $('"p>From $399.99</p>');
+          $('.vacation').before(price);
+          });
+[js]
+</code></pre>
+The above code will append the <span class='quoted'>"p"</span> element before the <span class='quoted'>"li"</span> element whose 
+class name is <span class='quoted'>'vacation',</span> in the same hierarchy. 
+
+        "<pre>"
+        ---p
+            |
+            --- From $399.99
+
+        ---li class='vacation'
+            |
+            ---h2
+                |
+                --- some text
+            |
+            ---button
+                  |
+                  --- some work
+        "</pre>"
+
+
+<li> 2. Removing from the DOM:</li>
+<pre><code>
+[js]
+      $(document).ready(function() {
+      var price = $('<p>From $399.99</p>');
+      $('.vacation').append(price);
+      $('button').remove();
+      });
+[js]
+</code></pre>
+Removes the <span class='quoted'>"button"</span> from the DOM. 
+
+
+<li> 3. Adding to the DOM:</li>
+<h2>methods</h2>
+<li> 1. '.appendTo(<element>)'</li>
+<pre><code>
+[js]
+            price.appendTo($('.vacation'));
+            //compare it with the '.append' method
+[js]
+</code></pre>
+<li> 2. '.prependTo(<element>)'</li>
+
+<li> 3. '.insertAfter(<element>)'</li>
+
+<li> 4. '.insertBefore(<element>)'</li>
+
+
+<h2>Acting on Interaction</h2>
+<li> 1. passing in a function:</li>
+<pre><code>
+[js]
+      $('button').on('click', function() {
+        // runs when any button is clicked
+      });
+
+      /*
+        .on(<event>, <event handler>)
+
+       */
+[js]
+</code></pre>
+
+<li> 2. removing the button which has been clicked:</li>
+<pre><code>
+[js]
+      $(document).ready(function() {
+      $('button').on('click', function() {
+          var price = $('<p>From $399.99</p>');
+              $('.vacation').append(price);
+              $(this).remove(); // 'this.remove() does not work because "this" is not a jquery object'
+          });
+      });
+[js]
+</code></pre>
+
+<li> 3. adding a "p" after the button which has been clicked</li>
+<pre><code>
+[js]
+      $(document).ready(function() {
+          $('button').on('click', function() {
+              var price = $('<p>From $399.99</p>');
+              // Add the price as a sibling after button
+              $(this).after(price); // note the 'after' method
+              $(this).remove();
+          });
+      });
+[js]
+</code></pre>
+
+but the above code is fragile, as the result will be different when the<span class='quoted'>"button"</span> element will be at some other place. 
+<h2>soln</h2>
+<pre><code>
+[js]
+        $(document).ready(function() {
+            $('button').on('click', function() {
+                var price = $('<p>From $399.99</p>');
+                $(this).closest('.vacation').append(price);
+                $(this).remove();
+            });
+        });
+[js]
+</code></pre>
+
+the * closest * function finds the the parent which is <span class='quoted'>'closest'</span> to 
+the element.
+<h2>conider the below code</h2>
+<pre><code>
+[js]
+        $(document).ready(function() {
+            $('button').on('click', function() {
+                ...
+            });
+        });
+[js]
+</code></pre>
+<span class='quoted'>"</span> If we add new buttons anywhere, they will trigger this click handler <span class='quoted'>"</span> 
+
+<h2>sol</h2>
+<h2>"event delegation"</h2>
+<pre><code>
+[js]
+          $('.vacation').on('click', 'button', function() {});
+[js]
+</code></pre>
+Only target a <span class='quoted'>'button'</span> if it’s inside a <span class='quoted'>'.vacation'</span> 
+
+
+
+<h2>Filtering in jQuery</h2>
+<li> 1. Finds elements with a class of '.vacation' and '.onsale':</li>
+<pre><code>
+[js]
+      $('.vacation').filter('.onsale')
+[js]
+</code></pre>
+
+
+
+<h2>Class manipulating in jQuery</h2>
+<li> 1. '.addClass(<class>)'</li>
+
+<li> 2. '.removeClass(<class>)'</li>
+
+<li> 3. '.toggleClass(<class>)':</li>
+<pre><code>
+[js]
+      $(this).toggleClass('highlighted');
+      //Adds the class if $(this) doesn’t have it, removes it if $(this) already has it
+[js]
+</code></pre>
+
+<li> 4. '.hasClass(<class>)': Returns 'true' or 'false'.</li>
+
+
+<h2>Animation in jQuery</h2>
+<li> 1. '.slideDown()'</li>
+
+<li> 2. '.slideUp()'</li>
+
+<li> 3. '.slideToggle()'</li>
+
+<li> 4. '.fadeIn()'</li>
+
+<li> 5. '.fadeOut()'</li>
+
+<li> 6. 'fadeToggle()'</li>
+
+<li> 7. '.animate(<object>)': takes a js object similar to 'css()'.</li>
+<pre><code>
+[js]
+        $(this).css({'top': '-10px'}); // The box will jump up 10 px
+        $(this).animate({'top': '-10px'});
+[js]
+</code></pre>
+
+<h2>"changing the speed in animation"</h2>
+<pre><code>
+[js]
+          $(this).animate({'top': '-10px'});
+          $(this).animate({'top': '-10px'}, 400);
+          $(this).animate({'top': '-10px'}, 'fast');
+          $(this).animate({'top': '-10px'}, 200);
+          $(this).animate({'top': '-10px'}, 'slow');
+          $(this).animate({'top': '-10px'}, 600);
+[js]
+</code></pre>
+
+
+<h2>Length method in jQuery</h2>
+<pre><code>
+[js]
+    $('li').length;
+[js]
+</code></pre>
+
+
+
+
+<h2>Events in jQuery</h2>
+<h2>"mouse events"</h2>
+<li> 1.  click</li>
+<li> 2.  focusin</li>
+<li> 3.  mousedown</li>
+<li> 4.  mousemove</li>
+<li> 5.  mouseover</li>
+<li> 6.  dblclick</li>
+<li> 7.  focusout</li>
+<li> 8.  mouseup</li>
+<li> 9.  mouseout</li>
+<li> 10. mouseleave</li>
+<li> 11. mouseenter</li>
+
+<h2>"keyboard events"</h2>
+<li> 1. keypress</li>
+<li> 2. keydown</li>
+<li> 3. keyup</li>
+
+<h2>"form events"</h2>
+<li> 1. blur</li>
+<li> 2. select</li>
+<li> 3. change</li>
+<li> 4. focus</li>
+<li> 5. submit</li>
+
+
+
+
+<h2>Random questions in jQuery</h2>
+<li> 1. how to change string to integer:</li>
+<h2>sol</h2>
+put a <span class='quoted'>'+'</span> sign before the string. 
+
+
+
+<h2>Event bubbling(stopPropagation() and preventDefault())</h2>
+<h2>"event bubbling"</h2>
+<pre><code>
+[js]
+      $(document).ready(function() {
+          $('.vacation').on('click', '.expand',
+            function(event) {
+              $(this).closest('.vacation')
+              .find('.comments')
+              .fadeToggle();
+          });
+      });
+[js]
+</code></pre>
+<h2>*note*</h2>
+The click event will “bubble up” to each parent node.
+<h2>".stopPropagation"</h2>
+<pre><code>
+[js]
+      $(document).ready(function() {
+          $('.vacation').on('click', '.expand',
+            function(event) {
+                event.stopPropagation();
+                $(this).closest('.vacation')
+                .find('.comments')
+                .fadeToggle();
+          });
+      });
+[js]
+</code></pre>
+<h2>*note*</h2>
+The browser will  <span class='quoted'>"still handle"</span> the  <span class='quoted'>"click event"</span> but will <span class='quoted'>"prevent"</span> it 
+from  <span class='quoted'>"bubbling up"</span> to each parent node. 
+
+<h2>".preventDefault"</h2>
+<pre><code>
+[js]
+      $(document).ready(function() {
+          $('.vacation').on('click', '.expand',
+            function(event) {
+              event.preventDefault();
+              $(this).closest('.vacation')
+              .find('.comments')
+              .fadeToggle();
+            }
+          );
+      });
+[js]
+</code></pre>
+
+<h2>*note*</h2>
+The click event will  <span class='quoted'>"bubble up"</span> but the browser won’t handle it. 
+
+
+
+<h2>Taming the CSS</h2>
+<h2>correct way of manipulating CSS from jQuery</h2>
+<pre><code>
+[js]
+      $(this).css({'background-color': '#252b30',
+      'border-color': '1px solid #967'});
+[js]
+</code></pre>
+
+<h2>method</h2>
+<li> 1. '.css(<attr>, <value>)'</li>
+<li> 2. '.css(<attr>)'</li>
+<li> 3. '.css(<object>)'</li>
+
+<h2>"showing / hiding"</h2>
+<li> 1. '.show()'</li>
+<li> 2. '.hide()'</li>
+
+<pre><code>
+[js]
+      $(this).find('.price').css('display', 'block'); // wrong
+      $(this).find('.price').show(); // right
+[js]
+</code></pre>
